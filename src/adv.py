@@ -1,4 +1,6 @@
 from room import Room
+from player import Player
+from item import Item
 
 # Declare all the rooms
 room = {
@@ -37,8 +39,30 @@ room['treasure'].s_to = room['narrow']
 
 name = input("Enter your player's name: ")
 player = Player(name, room["outside"])
+current_room = player.current_room
 
-gameRunning = True
+print(f"Welcome, {name} to this Adventure Game!")
 
-while gameRunning:
-    
+game_running = True
+
+while game_running:
+    print(f"{name}'s current location: {player.current_room.name} ({player.current_room.description})")
+
+    user_choice = input("Choose a direction to move.  Enter n, s, e, or w: ").lower()
+    if user_choice == "n":
+        player.current_room = player.current_room.n_to
+        print(f"{name} went North.")
+    elif user_choice == "s":
+        player.current_room = player.current_room.s_to
+        print(f"{name} went South.")
+    elif user_choice == "e":
+        player.current_room = player.current_room.s_to
+        print(f"{name} went East.")
+    elif user_choice == "w":
+        player.current_room = player.current_room.s_to
+        print(f"{name} went West.")
+    elif user_choice == "q":
+        print("Thanks for playing. Now exiting game.")
+        game_running = False
+    else:
+        print("Not a valid direction.")
