@@ -35,5 +35,10 @@ room['treasure'].s_to = room['narrow']
 #
 # If the user enters "q", quit the game.
 
-name = input("Enter your name: ")
-print(name)
+name = input("Enter your player's name: ")
+player = Player(name, room["outside"])
+
+gameRunning = True
+
+while gameRunning:
+    
