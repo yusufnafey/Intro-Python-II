@@ -1,6 +1,7 @@
 from room import Room
 from player import Player
 from item import Item
+import os
 
 # Declare all the rooms
 room = {
@@ -42,25 +43,46 @@ player = Player(name, room["outside"])
 current_room = player.current_room
 
 print(f"Welcome, {name} to this Adventure Game!")
+os.system("clear")
 
 game_running = True
+
+def wrong_direction():
+    print("There isn't anything this way!")
+    os.system("clear")
 
 while game_running:
     print(f"{name}'s current location: {player.current_room.name} ({player.current_room.description})")
 
-    user_choice = input("Choose a direction to move.  Enter n, s, e, or w: ").lower()
+    user_choice = input("Choose a direction to move.  Enter n (North), s (South), e (East), w (West), or q (quit): ").lower()
     if user_choice == "n":
-        player.current_room = player.current_room.n_to
-        print(f"{name} went North.")
+        if hasattr(player.current_room, "n_to"):
+            player.current_room = player.current_room.n_to
+            print(f"{name} went North.")
+            os.system("clear")
+        else:
+            wrong_direction()
     elif user_choice == "s":
-        player.current_room = player.current_room.s_to
-        print(f"{name} went South.")
+        if hasattr(player.current_room, "s_to"):
+            player.current_room = player.current_room.s_to
+            print(f"{name} went South.")
+            os.system("clear")
+        else:
+            wrong_direction()
     elif user_choice == "e":
-        player.current_room = player.current_room.s_to
-        print(f"{name} went East.")
+        if hasattr(player.current_room, "e_to"):
+            player.current_room = player.current_room.e_to
+            print(f"{name} went East.")
+            os.system("clear")
+        else:
+            wrong_direction()
     elif user_choice == "w":
-        player.current_room = player.current_room.s_to
-        print(f"{name} went West.")
+        if hasattr(player.current_room, "w_to"):
+            player.current_room = player.current_room.w_to
+            print(f"{name} went West.")
+            os.system("clear")
+        else:
+            wrong_direction()
     elif user_choice == "q":
         print("Thanks for playing. Now exiting game.")
         game_running = False
